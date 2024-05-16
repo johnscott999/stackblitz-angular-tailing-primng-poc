@@ -1,0 +1,3 @@
+/** should be the first reference of the global css files */
+/* this both defines the layers, and sets their initial order */
+@layer tailwind-base, primeng, tailwind-utilities;

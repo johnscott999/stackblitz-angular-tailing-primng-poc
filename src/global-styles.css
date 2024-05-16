@@ -1,0 +1,27 @@
+/* Add application styles & imports to this file! */
+/* prime ng styles are inported into the layer `primeng` */
+
+/**
+ *  NOTE: layers should be declared in css-layers.css to avoid an issue with layers being applied
+ *   in the order declared. Layers can be modified here.
+ */
+
+@import 'primeng/resources/themes/lara-light-blue/theme.css';
+@import 'primeng/resources/primeng.css';
+
+/* tailwind-utilitys must be last since this is the on element decoration */
+/* see https://primeng.org/guides/csslayer for more info */
+@layer tailwind-base {
+  @tailwind base;
+}
+
+@layer tailwind-utilities {
+  @tailwind components;
+  @tailwind utilities;
+}
+
+/* any new css layers should be defined in `./css-layers.css` so that the order is correct */
+
+
+/* application rules below this line */
+

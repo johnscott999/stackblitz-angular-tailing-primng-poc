@@ -1,0 +1,108 @@
+<div class="p-1">
+  <h1 class="text-3xl font-bold underline hover:text-blue-800">Hello world!</h1>
+  <p class="hover:text-blue-800">
+    This is the home page. Hover me to see tailwind works!
+  </p>
+
+  <div class="flex flex-col mt-1">
+    <label for="value">Type a Value</label>
+    <p-iconField iconPosition="right">
+      <input
+        pInputText
+        id="value"
+        aria-describedby="value-help"
+        [(ngModel)]="value"
+      />
+      <p-inputIcon><i class="fa-solid fa-spinner fa-spin"></i></p-inputIcon>
+    </p-iconField>
+    <small id="value-help">
+      Help text. Enter any value in this field, and submit
+    </small>
+
+    <div>
+      <div class="flex justify-end items-start">
+        <p-button
+          class="mt-2 ml-2"
+          severity="secondary"
+          [text]="true"
+          label="Cancel"
+          (click)="onCancel()"
+        />
+        <p-button class="mt-2 ml-2" label="Submit" (click)="onSubmit()" />
+      </div>
+    </div>
+
+    <p-accordion [activeIndex]="0" class="mt-4">
+      <p-accordionTab header="Adding a new PrimeNg Component">
+        <ol class="list-decimal">
+          <li>Open <code>app.module.ts</code></li>
+          <li>Add the import to the top of the file</li>
+          <li>Add the component to the module imports array</li>
+        </ol>
+      </p-accordionTab>
+      <p-accordionTab header="Dev notes (from setup)">
+        <ul class="list-disc">
+          <li class="line-through">
+            I had to disable
+            <a target="_" href="https://tailwindcss.com/docs/preflight"
+              >Tailwind Preflight</a
+            >
+            to get the styles to work correctly.
+            <ul>
+              <li>
+                This could be either the css layers aren't correct, or the
+                preflight styles are interacting poorly with prime ng.
+              </li>
+              <li>
+                likely related to
+                <a
+                  target="_"
+                  href="https://tailwindcss.com/docs/preflight#border-styles-are-reset-globally"
+                  >this</a
+                >
+              </li>
+            </ul>
+          </li>
+          <li>
+            The issue is related to the ordering of the css layers, where prime
+            ng is considered less important than the tailwind core layer, which
+            includes the preflight (css reset) stylings. Fix is to declare the
+            layers before doing the prime ng imports. unfortunately, css wants
+            imports at the top of the page, so the fix is
+            <ol class="list-decimal ml-4">
+              <li>
+                create a new global css file, <code>css-layers.css</code>, in
+                the project src folder
+              </li>
+              <li>
+                add the layers declartation to that file that declares the
+                layers in the correct order <br />
+                <code
+                  >&#64;layer tailwind-base, primeng, tailwind-utilities;
+                </code>
+              </li>
+              <li>
+                add a reference to the new css file into the
+                <code>angular.json</code> file in the build options node<br />
+                <code>
+                  // project.demo.architect.build.options "styles":
+                  ["src/css-layers.css", "src/global-styles.css"],
+                </code>
+              </li>
+            </ol>
+          </li>
+          <li>
+            Prime Ng Global Config:
+            <a target="_" href="https://primeng.org/configurationt">Link</a>
+          </li>
+          <li>
+            Prime Ng Custom theming:
+            <a target="_" href="https://primeng.org/theming#customtheme"
+              >Link</a
+            >
+          </li>
+        </ul>
+      </p-accordionTab>
+    </p-accordion>
+  </div>
+</div>
